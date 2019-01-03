@@ -1,4 +1,6 @@
-checkout scm
+node('linux') {
+    checkout scm
+}
 pipeline {
     agent any
 
