@@ -5,9 +5,9 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('Test') {
             steps {
-                sh test
+                sh('test.sh')
             }
         }
 
