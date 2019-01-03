@@ -1,4 +1,4 @@
-node('linux') {
+node {
     checkout scm
 }
 pipeline {
