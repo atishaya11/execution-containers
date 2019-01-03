@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-                sh('test.sh')
+                sh('/home/atishaya/.jenkins/workspace/execution-containers/test.sh')
             }
         }
 
