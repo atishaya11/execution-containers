@@ -1,3 +1,4 @@
+checkout scm
 pipeline {
     agent any
 
