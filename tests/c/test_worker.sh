@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 pushd $(dirname "$0")
 DIR=$(pwd)
-RUNBOX="${DIR}/runbox"
+EXECUTE_BOX="${DIR}/execute"
 
-echo ${RUNBOX}
+echo ${EXECUTE_BOX}
 # Create runbox
-mkdir -p ${RUNBOX}
+mkdir -p ${EXECUTE_BOX}
 
 # Copy source to runbox
-cp -fv ${DIR}/source.c ${RUNBOX}/source.c
-cp -fv ${DIR}/run.stdin ${RUNBOX}/run.stdin
+cp -fv ${DIR}/source.c ${EXECUTE_BOX}/source.c
+cp -fv ${DIR}/run.stdin ${EXECUTE_BOX}/run.stdin
 
 # Test Compile
 docker run \
@@ -18,14 +18,14 @@ docker run \
     --ulimit nofile=64:64 \
     --rm \
     --read-only \
-    -v "$RUNBOX":/usr/src/runbox \
+    -v "${EXECUTE_BOX}":/usr/src/runbox \
     -w /usr/src/runbox atishaya/judge-worker-c \
-    bash -c "/bin/compile.sh && /bin/run.sh"
+    bash -c "/bin/compile.sh && /bin/run.sh 1"
 
-ls -lh ${RUNBOX}
+ls -lh ${EXECUTE_BOX}
 
 expected="Hello World"
-actual="$(cat ${RUNBOX}/run.stdout)"
+actual="$(cat ${EXECUTE_BOX}/run.stdout)"
 if [ "$expected" == "$actual" ] ;then
     :
 else
@@ -34,4 +34,4 @@ else
 fi
 
 # Delete runbox
-rm -rf ${RUNBOX}
+rm -rf ${EXECUTE_BOX}

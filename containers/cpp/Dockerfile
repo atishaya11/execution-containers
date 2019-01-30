@@ -1,6 +1,6 @@
 FROM alpine:3.6
 
-RUN apk add --no-cache g\+\+ musl-dev bash
+RUN apk add --no-cache g\+\+ musl-dev bash && apk add --update coreutils
 COPY ./compile.sh /bin/compile.sh
 COPY ./run.sh /bin/run.sh
 RUN chmod 777 /bin/compile.sh; \

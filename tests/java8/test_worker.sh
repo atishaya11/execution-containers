@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 pushd $(dirname "$0")
 DIR=$(pwd)
 RUNBOX="${DIR}/runbox"
@@ -20,17 +21,19 @@ docker run \
     --read-only \
     -v "$RUNBOX":/usr/src/runbox \
     -w /usr/src/runbox atishaya/judge-worker-java8 \
-    bash -c "/bin/compile.sh && /bin/run.sh"
+    bash -c "/bin/compile.sh && /bin/run.sh 1"
 
 ls -lh ${RUNBOX}
 expected="Hello World"
 actual="$(cat ${RUNBOX}/run.stdout)"
+timeout_signal="$(cat ${RUNBOX}/run.timesignal)"
 if [ "$expected" == "$actual" ] ;then
     :
 else
     echo "MISMATCH: Expected = $expected; Actual = $actual"
     exit 1
 fi
+
 
 # Delete runbox
 rm -rf ${RUNBOX}

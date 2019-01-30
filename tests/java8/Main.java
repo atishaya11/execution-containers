@@ -1,9 +1,13 @@
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
-public class Main {
+class Main{
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        String input = in.next();
-        System.out.println("Hello " + input);
+        String s = in.nextLine();
+        System.out.println("Hello " + s);
+
+
     }
+
 }
