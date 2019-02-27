@@ -1,9 +1,7 @@
 #!/usr/bin/env bash
 
-name=$(echo *.java | cut -f 1 -d '.')
-
 START_TIME=`date +%s%N`
-timeout -k ${1} ${1} java ${name} < run.stdin 1> run.stdout 2> run.stderr
+timeout -k ${1} ${1} python3 script.py < run.stdin 1> run.stdout 2> run.stderr
 echo $? > run.signal
 END_TIME=`date +%s%N`
 runtime=$((END_TIME-START_TIME))

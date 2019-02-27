@@ -26,9 +26,9 @@ docker run \
 ls -lh ${RUNBOX}
 expected="Hello World"
 actual="$(cat ${RUNBOX}/run.stdout)"
-timeout_signal="$(cat ${RUNBOX}/run.timesignal)"
+signal="$(cat ${RUNBOX}/run.signal)"
 if [ "$expected" == "$actual" ] ;then
-    :
+    echo ${signal}
 else
     echo "MISMATCH: Expected = $expected; Actual = $actual"
     exit 1
